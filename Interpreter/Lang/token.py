@@ -53,5 +53,16 @@ class Token(NamedTuple):
     def __str__(self) -> str:
         return f'{self.type.name} : {self.value}'
 
+    def lookup_token_type(literal: str) -> TokenType:
+        keywords: Dict[str, TokenType] = {
+            "fn": TokenType.FUNCTION,
+            "ident": TokenType.IDENT,
+            "true": TokenType.TRUE,
+            "false": TokenType.FALSE,
+            "if": TokenType.IF,
+            "else": TokenType.ELSE,
+            "return": TokenType.RETURN
+        }
+
 
 
