@@ -38,13 +38,22 @@ class Lexer:
         while self.current_char.isspace():
             self._read_char()
 
+    def _peek_character(self) -> str:
+        if self._read_current_pos >= len(self.text):
+            return ""
+        else:
+            return self.text[self._read_current_pos]
     """
     Evaluates each token and returns its type
     """
     def next_token(self):
         self._skip_whitespace()
         if match(r'^=$', self.current_char):
-            token = Token(TokenType.ASSIGN, self.current_char)
+            if self._peek_character() == "=":
+                self._read_char()
+                token = Token(TokenType.EQ, "==")
+            else:
+                token = Token(TokenType.ASSIGN, self.current_char)
         elif match(r'^\+$', self.current_char):
             token = Token(TokenType.PLUS, self.current_char)
         elif match(r'^,$', self.current_char):
@@ -68,15 +77,27 @@ class Lexer:
         elif match(r'^\*$', self.current_char):
             token = Token(TokenType.MULTIPLICATION, self.current_char)
         elif match(r'^<$', self.current_char):
-            token = Token(TokenType.LESS_THAN, self.current_char)
+            if self._peek_character() == "=":
+                self._read_char()
+                token = Token(TokenType.LESSERQ_THAN, "<=")
+            else:
+                token = Token(TokenType.LESS_THAN, self.current_char)
         elif match(r'^>$', self.current_char):
-            token = Token(TokenType.GREATER_THAN, self.current_char)
+            if self._peek_character() == "=":
+                self._read_char()
+                token = Token(TokenType.MOREQ_THAN, ">=")
+            else:
+                token = Token(TokenType.GREATER_THAN, self.current_char)
         elif match(r'^\[$', self.current_char):
             token = Token(TokenType.L_BRACKET, self.current_char)
         elif match(r'^\]$', self.current_char):
             token = Token(TokenType.R_BRACKET, self.current_char)
         elif match(r'^!$', self.current_char):
-            token = Token(TokenType.NOT, self.current_char)
+            if self._peek_character() == "=":
+                self._read_char()
+                token = Token(TokenType.NOT_EQ, "!=")
+            else:
+                token = Token(TokenType.NOT, self.current_char)
         else:
             token = Token(TokenType.ILLEGAL, self.current_char)
         self._read_char()

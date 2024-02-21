@@ -32,6 +32,18 @@ class TokenType(Enum):
     L_BRACKET = auto() #[
     R_BRACKET = auto() #]
     NOT = auto() #!
+    EQ = auto() # ==
+    NOT_EQ = auto() # !=
+    IDENT = auto() # Identifier
+    INT = auto() # Integer
+    LESSERQ_THAN = auto() # <=
+    MOREQ_THAN = auto() # >=
+    FALSE = auto() # false
+    IF = auto() # if
+    ELSE = auto() # else
+    FUNCTION = auto() # fn
+    TRUE = auto() # true
+    RETURN = auto() # return
 
 
 class Token(NamedTuple):
