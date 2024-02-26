@@ -51,9 +51,7 @@ class TokenType(Enum):
     GREATER_THAN = auto()  # >
     L_BRACKET = auto()  # [
     R_BRACKET = auto()  # ]
-    """
-    {,},[,],+,/,(,)^,!,<,>
-    """
+
 
 
 class Token(NamedTuple):

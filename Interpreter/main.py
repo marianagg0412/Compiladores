@@ -7,3 +7,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    lista = ["10","6","7","8","9","12"]
+    str1 = '_'.join(lista)
+    print(str1)
