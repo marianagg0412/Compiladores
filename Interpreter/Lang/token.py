@@ -2,6 +2,7 @@ from enum import (
     Enum,
     auto,
     unique
+
 )
 from typing import (
     Dict,
@@ -36,7 +37,7 @@ class TokenType(Enum):
     INT = auto()  # entero
     LT = auto()  # <
     LTE = auto()  # <=
-    NOE_ = auto()  # !=
+    NOE = auto()  # !=
     NOT = auto()  # !
     PLUS = auto()  # +
     SEMICOLON = auto()  # ;
@@ -51,7 +52,9 @@ class TokenType(Enum):
     GREATER_THAN = auto()  # >
     L_BRACKET = auto()  # [
     R_BRACKET = auto()  # ]
-
+    """
+    {,},[,],+,/,(,)^,!,<,>
+    """
 
 
 class Token(NamedTuple):
@@ -76,4 +79,3 @@ def lookup_token_type(token_type: str) -> TokenType:
         'int': TokenType.INT,
     }
     return keywords.get(token_type, TokenType.IDENT)
-

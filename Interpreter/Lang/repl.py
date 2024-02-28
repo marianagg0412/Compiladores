@@ -2,11 +2,14 @@ from Lang.token import (
     Token, TokenType
 )
 from Lang.lexer import Lexer
+from Lang.parser import Parser
+from Lang.ast import Program
 
 
 def start_repl():
-    print("Welcome to the Monkey programming language")
+    print("Sind alles Wilkommen")
     while (source := input(">>>")) != "exit":
         lexer = Lexer(source)
-        while (token := lexer.next_token()) != Token(TokenType.EOF, ""):
-            print(token)
+        parser: Parser = Parser(lexer)
+
+        program: Program = parser.parse_program()

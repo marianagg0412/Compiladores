@@ -1,13 +1,11 @@
 from abc import (
     ABC,
-    abstractmethod
+    abstractmethod,
 )
-
 from typing import (
     List,
     Optional
 )
-
 from Lang.token import Token
 
 
@@ -44,13 +42,13 @@ class Program(ASTNode):
     def token_literal(self) -> str:
         if len(self.statements) > 0:
             return self.statements[0].token_literal()
-        return ""
+        return ''
 
     def __str__(self) -> str:
-        out = List[str] = []
-        for s in self.statements:
-            out.append(str(s))
-        # .join returns a string from the elements of the list
+        out: List[str] = []
+        for statement in self.statements:
+            out.append(str(statement))
+        # Vuelve una lista en un string
         return ''.join(out)
 
 
@@ -64,22 +62,22 @@ class Identifier(Expression):
 
 
 class LetStatement(Statement):
-    def __init__(self, token: Token, name: Optional[Identifier], value: Optional[Expression] = None) -> None:
+    def __init__(self, token: Token, name: Identifier, value: Optional[Expression] = None) -> None:
         super().__init__(token)
         self.name = name
         self.value = value
 
     def __str__(self) -> str:
-        return f'{self.token_literal()} {str(self.name)} = {str(self.value)}'
+        return f'{self.token_literal()} {self.name} = {self.value}'
 
 
 class ReturnStatement(Statement):
-    def __init__(self, token: Token, return_value: Optional[Expression]) -> None:
+    def __init__(self, token: Token, value: Optional[Expression]) -> None:
         super().__init__(token)
-        self.return_value = return_value
+        self.return_value = value
 
     def __str__(self) -> str:
-        return f'{self.token_literal()} {str(self.return_value)};'
+        return f'{self.token_literal()} {str(self.return_value)}'
 
 
 class ExpressionStatement(Statement):
@@ -92,10 +90,10 @@ class ExpressionStatement(Statement):
 
 
 class IntegerLiteral(Expression):
-    def __init__(self, token: Token, value: int) -> None:
+    def __init__(self, token: Token, value: Optional[int]) -> None:
         super().__init__(token)
         self.value = value
 
     def __str__(self) -> str:
-        return self.token.literal
+        return str(self.value)
 

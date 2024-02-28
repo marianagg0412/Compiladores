@@ -4,27 +4,21 @@ from abc import (
 )
 
 from enum import (
-    Enum,
-    auto
+    auto,
+    Enum
 )
 
 
 class ObjectType(Enum):
-    """
-    Can add objects that will be used in the interpreter
-    Can add any data types
-    """
     BOOLEAN = auto()
     INTEGER = auto()
     NULL = auto()
     STRING = auto()
 
 
-class Object(ABC):
+class Object(ABC):  # ABC dice que esto es una clase abstracta
     @abstractmethod
     def type(self) -> ObjectType:
-        # We put pass given that in Python methods are required to have a body
-        # Given that it is an abstract method, we don't need to implement it
         pass
 
     @abstractmethod
@@ -59,7 +53,7 @@ class Null(Object):
         return ObjectType.NULL
 
     def inspect(self) -> str:
-        return 'null'
+        return "null"
 
 
 class String(Object):
@@ -70,5 +64,4 @@ class String(Object):
         return ObjectType.STRING
 
     def inspect(self) -> str:
-        return str(self.value)
-
+        return self.value
