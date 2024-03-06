@@ -97,3 +97,32 @@ class IntegerLiteral(Expression):
     def __str__(self) -> str:
         return str(self.value)
 
+
+class Prefix(Expression):
+    def __init__(self, token: Token, operator: str, right: Optional[Expression] = None) -> None:
+        super().__init__(token)
+        self.operator = operator
+        self.right = right
+
+    def __str__(self) -> str:
+        return f'{self.operator}{str(self.right)}'
+
+
+class Infix(Expression):
+    def __init__(self, token: Token, left: Expression, operator: str, right: Optional[Expression] = None) -> None:
+        super().__init__(token)
+        self.operator = operator
+        self.left = left
+        self.right = right
+
+    def __str__(self):
+        return f'({str(self.left)} {self.operator} {str(self.right)})'
+
+
+class Boolean(Expression):
+    def __init__(self, token: Token, value: Optional[bool] = None) -> None:
+        super().__init__(token)
+        self.value = value
+
+    def __str__(self) -> str:
+        return self.token_literal()
